@@ -1,0 +1,7 @@
+{
+  "disableGlasstronApi": true,
+  "windowProps": {},
+  "modules": {
+    "CSSLoader": true
+  }
+}

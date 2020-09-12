@@ -1,0 +1,20 @@
+
+configuration {
+ modi: "window,drun,combi";
+ font: "fira-code 25";
+ width: 45;
+ lines: 8;
+ separator-style: "none";
+ hide-scrollbar: true;
+ bw: 0;
+ display-drun: "";
+ line-padding: 8;
+ combi-modi: "window,drun,ssh";
+ ml-row-left: "ScrollLeft";
+ ml-row-right: "ScrollRight";
+ yoffset: -250;
+ show-icons: true;
+ separator-style: " ";
+ kb-cancel: "Escape,Super+space";
+ theme: "Milo.rasi";
+}
