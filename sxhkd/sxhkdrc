@@ -1,0 +1,219 @@
+# ==============
+#  Applications
+# ==============
+
+# paste plain text
+super + Num_Lock
+	hug
+
+# open system monitor
+super + grave
+	killall gnome-system-monitor; gnome-system-monitor &
+
+# open neovim
+super + z
+	rofi_bluetooth
+
+# open pycharm
+# super + a
+# 	pycharm
+
+# open discord
+super + d
+	discord
+
+# open sublime
+super + o
+	subl3
+
+# open spotify
+super + s
+	spotify
+
+# open firefox
+super + f
+	firefox
+
+# open thunar
+super + v
+	thunar
+
+# open/focus on cmus
+super + n
+	sumc
+
+# random wallpaper
+super + k
+	hefrandom
+
+# restart sxhkd
+super + i
+	pkill -SIGUSR1 sxhkd
+
+# terminal
+super + t
+	kitty 
+	
+
+# toggle rofi (app launcher)
+super + space
+	rofi -show drun
+
+# calendar
+super + h
+	alacritty
+
+# # wifi menu
+# super + x 
+# 	rofi_wifi	
+
+# toggle on/off polybar showing
+super + b
+	rabyloptoggle
+
+
+# =====
+# bspwm
+# =====
+
+# shutdown computer
+# super + Escape
+# 	poweroff
+
+# restart bspwm
+super +  Escape
+	bspc wm -r
+
+# kill application
+alt + q
+	bspc node -k
+
+# close application
+super + q
+	bspc node -c
+
+# swap between monocle and tiled
+super + r
+	bspc desktop -l next
+
+# kill bspwm
+super + shift + q
+	pkill bspwm
+
+# focus on the node in the given direction
+super + {Left, Down, Up, Right}
+	bspc node -f {west,south,north,east}
+
+# swap nodes in any given direction or MOVE to a blank monitor
+alt + {Left, Down, Up, Right}
+    d={west,south,north,east}; bspc node -s $d --follow || bspc node -m $d --follow; cursor 
+
+# focus or send to the given desktop
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+
+# resize size of window
+alt + shift + {Left, Down, Up, Right}
+    bspwm_resize {west,south,north,east}	
+
+alt + Tab
+	bspc node -f next;
+
+alt + shift + Tab
+	bspc node -f prev;
+
+# Toggle floating on and off
+super + a
+  bspc node focused.tiled -t floating || bspc node focused.floating -t tiled
+
+# Expand a window by moving one of its side outward
+ctrl + alt + {j,k,i,l}
+	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+  #xdo resize {-w -20, -h +20, -h -20, -w +20}
+
+# Contract a window by moving one of its side inward
+ctrl + alt + shift + {j,k,i,l}
+	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+  #xdo resize {-w +20, -h -20, -h +20, -w -20}
+
+# ========
+#  Volume
+# ========
+
+# change device to output to for specific window
+super + p 
+	vol wd	
+
+# mute current window
+super + backslash
+	vol wm
+
+# increase current window volume
+super + bracketright
+	vol w +5
+
+# decrease current window volume
+super + bracketleft
+	vol w -5	
+
+# toggle on/off cmus playback
+alt + backslash
+	vol cp
+
+# increase cmus volume
+alt + bracketright
+	vol c +5
+
+# decrease cmus volume
+alt + bracketleft 	
+	vol c -5
+
+# decrease system volume
+XF86AudioLowerVolume 			
+	vol s -5
+
+# increase system volume
+XF86AudioRaiseVolume	
+	vol s +5
+
+# mute system
+XF86AudioMute	vol sm
+
+
+# ======
+#  Misc
+# ======
+
+# lock screen
+super + l
+	systemctl suspend
+
+# change keyboard language
+super + {m,comma,period,slash,Shift_R}
+	setxkbmap -layout { ,it,fr,de,mt} us
+
+# take a photo with webcam
+super + Print
+	ffmpeg -y -f video4linux2 -s 640x480 -i /dev/video0 -ss 0:0:2 -frames 1 /tmp/out.jpg		
+
+# take a screenshot of a selection
+shift + Print
+	ss -s
+
+# take a screenshot of a selection, upload to 0x0.st and copy url to clipboard
+Print
+	ss -u
+
+# start/stop a gif recording of a selection
+ctrl + shift + Print
+  { giph -f 30 -s -l -c 0.3\,0\,0.5\,0.3 /home/pwn0si/var/videos/$(date +%s).gif, killall -INT -g giph }
+
+# start/stop a gif recording of a selection, upload to 0x0.st and copy url to clipboard
+ctrl + Print
+   { /home/pwn0si/usr/git/giph/src/giph -f 30 -s -l -c 0.3\,0\,0.5\,0.3 -e gif | (trap '' INT; curl -F "file=@-" 0x0.st | xclip -selection clipboard && notify-send "Video uploaded to 0x0.st"), killall -INT -g giph }
+
+XF86MonBrightnessUp
+	brightness up
+
+XF86MonBrightnessDown
+	brightness down
